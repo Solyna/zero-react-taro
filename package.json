@@ -109,7 +109,7 @@
     "webpack-merge": "^4.2.1",
     "whatwg-fetch": "2.0.3"
   },
-  "license": "MIT",
+  "license": "ISC",
   "prettier": {
     "singleQuote": true,
     "semi": false,
