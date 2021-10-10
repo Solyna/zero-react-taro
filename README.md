@@ -86,7 +86,8 @@ home // 页面目录名
 > [react](https://react.docschina.org/docs/getting-started.html)  
 > [redux](http://cn.redux.js.org/)  
 > [redux-saga](https://redux-saga-in-chinese.js.org/)  
-> [React Router](https://react-guide.github.io/react-router-cn/docs/Introduction.html) > [kbone](https://github.com/wechat-miniprogram/kbone)
+> [React Router](https://react-guide.github.io/react-router-cn/docs/Introduction.html)  
+> [kbone](https://github.com/wechat-miniprogram/kbone)
 
 ### 社区好文推荐
 
