@@ -1,21 +1,20 @@
 {
-  "description": "项目配置文件",
-  "miniprogramRoot": "dest/mp/",
-  "packOptions": {
-    "ignore": []
-  },
+  "miniprogramRoot": "dist/",
+  "projectname": "demo",
+  "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "appid": "wxec94a96e47d6d033",
   "setting": {
     "urlCheck": false,
-    "es6": true,
+    "es6": false,
     "enhance": true,
-    "postcss": true,
+    "postcss": false,
     "preloadBackgroundData": false,
-    "minified": true,
-    "newFeature": false,
+    "minified": false,
+    "newFeature": true,
     "coverView": true,
     "nodeModules": false,
     "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
+    "showShadowRootInWxmlPanel": false,
     "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
@@ -25,51 +24,36 @@
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "enableEngineNative": false,
     "useIsolateContext": true,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
-    "showES6CompileOption": false
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false,
+    "ignoreUploadUnusedFiles": true,
+    "useStaticServer": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.19.2",
-  "appid": "wxf8a12db8973af70d",
-  "projectname": "zero-react-micro",
-  "debugOptions": {
-    "hidedInDevtools": []
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {},
+  "libVersion": "2.17.0",
+  "srcMiniprogramRoot": "dist/",
+  "packOptions": {
+    "ignore": [],
+    "include": []
   },
-  "scripts": {},
-  "staticServerOptions": {
-    "baseURL": "",
-    "servePath": ""
-  },
-  "isGameTourist": false,
-  "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "plugin": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": []
-    }
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
   }
 }

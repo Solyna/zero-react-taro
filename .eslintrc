@@ -1,0 +1,48 @@
+{
+  "extends": ["taro"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".tsx"] }
+    ],
+    "indent": ["error", 2],
+    "no-cond-assign": ["error"],
+    "semi": ["error", "never"],
+    "eqeqeq": ["error"],
+    "space-infix-ops": ["error"],
+    "no-trailing-spaces": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "varsIgnorePattern": "Taro" }
+    ],
+    "quotes": ["error", "single"],
+    "react/jsx-key": "off",
+    "react/react-in-jsx-scope": ["never"]
+  },
+  "parser": "@typescript-eslint/parser",
+  "globals": {
+    "my": "readonly",
+    "wx": "readonly",
+    "App": "writable",
+    "preval": "readonly"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "useJSXTextNode": true,
+    "project": "./tsconfig.json"
+  },
+  "overrides": [
+    {
+      "files": ["script/**/*.js", "mock/**/*.js"],
+      "rules": {
+        "no-console": "off",
+        "import/no-commonjs": "off"
+      }
+    }
+  ]
+}
