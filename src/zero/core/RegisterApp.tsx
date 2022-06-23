@@ -1,14 +1,14 @@
-import React from "react";
+// import React from "react";
 import Taro from "@tarojs/taro";
 import { Provider } from "react-redux";
 import { store as $store } from "../redux";
-import { View } from "../components";
-import { PageLoading } from "../components"; // Exception
+// import { View } from "../components";
+// import { PageLoading } from "../components"; // Exception
 import ConfigureContext from "./ConfigureContext";
 // import useGlobalError from "./useGlobalError";
 import type { IConfig, IModel } from "../types/zero";
 
-let unsubscribe: Function;
+// let unsubscribe: Function;
 /**
  * 1. 初始化store
  * 2. 初始化路由
@@ -65,35 +65,35 @@ export default (appConfig: IConfig, appModel: IModel) =>
       }
 
       // 对应 onHide
-      componentDidHide() {}
+      // componentDidHide() {}
 
-      componentDidMount() {
-        // useGlobalError();
-        unsubscribe = $store.subscribe(() => {
-          const {
-            app: { appStatus, errorInfo },
-          } = $store.getState();
-          if (appStatus && appStatus !== "loading") {
-            this.setState({
-              appStatus,
-              errorInfo,
-            });
-          }
-          if (appStatus === "success") {
-            unsubscribe();
-          }
-        });
-        if (super.componentDidMount) {
-          super.componentDidMount();
-        }
-      }
+      // componentDidMount() {
+      //   // useGlobalError();
+      //   unsubscribe = $store.subscribe(() => {
+      //     const {
+      //       app: { appStatus, errorInfo },
+      //     } = $store.getState();
+      //     if (appStatus && appStatus !== "loading") {
+      //       this.setState({
+      //         appStatus,
+      //         errorInfo,
+      //       });
+      //     }
+      //     if (appStatus === "success") {
+      //       unsubscribe();
+      //     }
+      //   });
+      //   if (super.componentDidMount) {
+      //     super.componentDidMount();
+      //   }
+      // }
 
-      componentWillUnmount() {
-        unsubscribe && unsubscribe();
-        if (super.componentWillUnmount) {
-          super.componentWillUnmount();
-        }
-      }
+      // componentWillUnmount() {
+      //   unsubscribe && unsubscribe();
+      //   if (super.componentWillUnmount) {
+      //     super.componentWillUnmount();
+      //   }
+      // }
 
       // renderContent() {
       //   const { appStatus, errorInfo } = this.state;

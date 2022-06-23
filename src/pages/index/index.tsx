@@ -4,10 +4,14 @@ import { useEnv, useNavigationBar, useModal, useToast } from "taro-hooks";
 import logo from "./hook.png";
 import { guid } from "@/zero/utils";
 import "./index.less";
-import Taro from "@tarojs/taro";
+import Taro, { useReady, useRouter } from "@tarojs/taro";
 
 const Index = () => {
-  console.log("Index");
+  const router = useRouter();
+  useReady(() => {
+    console.log("router, wx", router, wx);
+  });
+
   const env = useEnv();
   const [_, { setTitle }] = useNavigationBar({ title: "Taro Hooks" });
   const [show] = useModal({
@@ -44,11 +48,14 @@ const Index = () => {
       <Button className="button" onClick={handleModal}>
         使用Modal
       </Button>
-      <Button className="button" onClick={() => {
-        Taro.navigateTo({
-          url: '/pages/common/outer/index'
-        });
-      }}>
+      <Button
+        className="button"
+        onClick={() => {
+          Taro.navigateTo({
+            url: "/pages/common/outer/index"
+          });
+        }}
+      >
         打开百度
       </Button>
     </View>

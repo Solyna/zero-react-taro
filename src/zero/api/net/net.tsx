@@ -216,10 +216,23 @@ class Net {
     });
   };
 
-  async request<R = any, P = any>(options: RequestOptions) {
+  async get(url: string, config?: RequestOptions) {
+    config = Object.assign({ url, method: "GET", dataType: "json" }, config);
+    return Taro.request(config as Taro.request.Option);
+  }
+
+  async post(url: string, data?: Record<string, any>, config?: RequestOptions) {
+    config = Object.assign(
+      { url, method: "POST", dataType: "json", data },
+      config
+    );
+    return Taro.request(config as Taro.request.Option);
+  }
+
+  async request<R = any, P = any>(config: RequestOptions) {
     // const requestIdentify = getRequestIdentify(options);
     const requestTask = Taro.request<RequestResponse<R>, P>(
-      options as Taro.request.Option
+      config as Taro.request.Option
     );
     const c = requestTask as Taro.RequestTask<RequestResponse<R>>;
     // pending[requestIdentify] = c.abort;

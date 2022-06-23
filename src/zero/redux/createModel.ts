@@ -5,7 +5,7 @@ import { createSelector, Selector } from "reselect";
 import {
   injectAsyncReducer,
   removeAsyncReducer,
-  sagaMiddleware,
+  sagaMiddleware
 } from "./configureStore";
 
 import { globalActions, injectGlobalActions } from "./rootAction";
@@ -28,7 +28,7 @@ export const createActionsFromMap = (map: any, prefix = "") => {
   map = toUpperCaseStyle({
     initState: void 0,
     setState: void 0,
-    ...map,
+    ...map
   });
   return createActions(map, { prefix });
 };
@@ -42,7 +42,7 @@ export const flatten = (
   const connectNamespace = (type: string) =>
     partialFlatActionType ? `${partialFlatActionType}.${type}` : type;
 
-  Object.keys(map).forEach((type) => {
+  Object.keys(map).forEach(type => {
     const nextNamespace = connectNamespace(type);
     const mapValue = map[type];
 
@@ -68,10 +68,10 @@ export const createReducerFromMap = (
     setState(state: any, { payload }: { payload: any }) {
       return {
         ...state,
-        ...payload,
+        ...payload
       };
     },
-    ...map,
+    ...map
   });
   map = Object.entries(map).reduce((result: any, [key, val]) => {
     const creator = key
@@ -94,7 +94,7 @@ const toLocalSelectors = (selectors: { [key: string]: any }, getState: any) =>
       return result;
     },
     {
-      getState,
+      getState
     }
   );
 
@@ -114,7 +114,7 @@ const createSagaFromMap = (map: any, actions: any, selectors: any) => {
       .toString();
     return [actionType, val, shouldTakeEvery];
   });
-  return function* () {
+  return function*() {
     for (let i = 0, len = map.length; i < len; i++) {
       const item = map[i];
       if (item[2]) {
@@ -122,14 +122,14 @@ const createSagaFromMap = (map: any, actions: any, selectors: any) => {
           $actions: actions,
           $selectors: selectors,
           $globalActions: globalActions,
-          $globalSelectors: globalSelectors,
+          $globalSelectors: globalSelectors
         });
       } else {
         yield takeLatest(item[0], item[1], {
           $actions: actions,
           $selectors: selectors,
           $globalActions: globalActions,
-          $globalSelectors: globalSelectors,
+          $globalSelectors: globalSelectors
         });
       }
     }
@@ -138,7 +138,7 @@ const createSagaFromMap = (map: any, actions: any, selectors: any) => {
 
 // 填补actionMap
 const fillActionMap = (actionMap: any, map: any) => {
-  Object.keys(map).forEach((key) => {
+  Object.keys(map).forEach(key => {
     if (isObject(map[key])) {
       if (!actionMap[key]) {
         actionMap[key] = {};
@@ -160,7 +160,7 @@ export default function createDucks({
   actions: actionMap = {},
   reducers: reducerMap = {},
   sagas: sagaMap = {},
-  selectors = {},
+  selectors = {}
 }: {
   name: string;
   state?: any;
@@ -189,8 +189,8 @@ export default function createDucks({
 
   const getInitState = (state: any) => state[name];
   const sliceSelector = toLocalSelectors(selectors, getInitState);
-  let { pageStatus, appStatus, ...initState } = state;
-  let sliceReducer = createReducerFromMap(reducerMap, sliceAction, initState);
+  // let { pageStatus, appStatus, ...initState } = state;
+  let sliceReducer = createReducerFromMap(reducerMap, sliceAction, state);
   const sliceSaga = createSagaFromMap(sagaMap, sliceAction, sliceSelector);
 
   injectAsyncReducer(name, sliceReducer);
@@ -230,6 +230,6 @@ export default function createDucks({
       // if (__DEV__) {
       console.log(`saga of ${name} has been canceled`);
       // }
-    },
+    }
   };
 }

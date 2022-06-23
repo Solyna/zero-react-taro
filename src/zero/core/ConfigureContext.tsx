@@ -1,4 +1,5 @@
 import React from "react";
+import Taro from "@tarojs/taro";
 
 export const AppConfigContext = React.createContext({});
 AppConfigContext.displayName = "AppConfigContext";

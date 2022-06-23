@@ -1,4 +1,3 @@
-
 export interface IConfig {
   isNeedLogin?: boolean;
 }
@@ -8,7 +7,6 @@ export interface IConfig {
  */
 export interface IPageConfig extends IConfig {
   pageId: string;
-  permissions?: string[];
 }
 
 /**

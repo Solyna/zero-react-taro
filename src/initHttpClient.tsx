@@ -10,7 +10,7 @@ export default (
   //   baseURL,
   // });
   net.interceptors.request.use((requestParams) => {
-    console.log("inithttpclient", requestParams);
+    // console.log("inithttpclient", requestParams);
     requestParams.url =
       "http://rap2api.taobao.org/app/mock/297643/" + requestParams.url;
     return requestParams;

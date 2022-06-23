@@ -13,34 +13,18 @@ const model = createModel({
   isGlobal: true,
   // 初始state状态
   state: {
-    appStatus: "",
+    appStatus: "loading",
   },
   reducers: {},
   sagas: {
     *onLunch({}: ISagas, { payload }: ISagaPayload) {
       initHttpClient();
-      const {res } = yield HttpClient.request({
-        url: 'getUserInfo',
+      const data = yield HttpClient.get('getUserInfo',{
         data: {a: 1},
-        method: "GET",
-        dataType: "json",
         responseType: "text"
       });
-      console.log('>>>>>>>', res);
-      
-      HttpClient.request({
-        url: 'getUserInfo',
-        data: {a: 1},
-        method: "GET",
-        dataType: "json",
-        responseType: "text"
-      }).then((res) => {
-        console.log("http::", res);
-        
-      }).catch((e) => {
-        console.log("http:error>>>:", e);
-      });
-      console.log("micro lunch,", payload);
+
+      console.log("micro lunch,", data);
     },
     *onShow({}: ISagas, { payload }: ISagaPayload) {
       console.log(" micro Show,", payload);
