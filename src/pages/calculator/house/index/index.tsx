@@ -1,6 +1,5 @@
 import React from "react";
 import Taro from "@tarojs/taro";
-// import { PageContainer } from "@ant-design/pro-layout";
 import { RegisterPage } from "@/zero/core";
 import { MemoComponent, PageContainer } from "@/zero/components";
 import type { IProps } from "@/zero/types/zero";
@@ -15,10 +14,13 @@ export default class extends React.PureComponent<IProps, {}> {
   }
 
   render(): React.ReactNode {
+    const cacheState = Taro.getStorageSync("house-state") || null;
+    console.log('cacheState:::', cacheState);
+    
     return (
       <PageContainer>
         <MemoComponent>
-          <Content />
+          <Content cacheState={cacheState} />
         </MemoComponent>
       </PageContainer>
     );

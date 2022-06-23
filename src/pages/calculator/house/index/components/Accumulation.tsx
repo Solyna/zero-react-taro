@@ -16,7 +16,19 @@ const accumulationInfo = [
     label: "公积金金额",
     name: "accumulationLoan",
     placeholder: "请输入公积金金额",
-    unit: "万"
+    unit: "万",
+    onInput: (value, state, setState) => {
+      if (state["loanAmount"]) {
+        setState({
+          accumulationLoan: value,
+          businessLoan: state["loanAmount"] - Number(value)
+        });
+      } else {
+        setState({
+          accumulationLoan: value
+        });
+      }
+    }
   },
   {
     label: "公积金年限",
@@ -39,10 +51,6 @@ const accumulationInfo = [
       "3.25": { text: "最新基准利率（3.25%）" },
       "3.575": { text: "最新基准利率上浮10%（3.575%）" }
     }
-    // sliderRange: {
-    //   min: 1,
-    //   max: 100
-    // }
   }
 ];
 
@@ -80,7 +88,6 @@ export default ({ state, setState }) => {
 
           return (
             <Picker
-              bindchange="bindPickerChange"
               name={item.name}
               value={value}
               range={range}
@@ -105,10 +112,13 @@ export default ({ state, setState }) => {
               name={item.name}
               onInput={({ detail }) => {
                 const { value } = detail;
-                // handleMoney(item.name, value);
-                setState({
-                  [item.name]: value
-                });
+                if (item.onInput) {
+                  item.onInput(value, state, setState);
+                } else {
+                  setState({
+                    [item.name]: value
+                  });
+                }
               }}
               value={state[item.name]}
               placeholder={item.placeholder}

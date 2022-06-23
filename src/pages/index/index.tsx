@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { View, Text, Button, Image } from "@/zero/components";
 import { useEnv, useNavigationBar, useModal, useToast } from "taro-hooks";
 import logo from "./hook.png";
@@ -57,6 +57,16 @@ const Index = () => {
         }}
       >
         打开百度
+      </Button>
+      <Button
+        className="button"
+        onClick={() => {
+          Taro.navigateTo({
+            url: "/pages/calculator/house/index/index"
+          });
+        }}
+      >
+        购房计算器
       </Button>
     </View>
   );

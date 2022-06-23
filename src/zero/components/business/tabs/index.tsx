@@ -12,20 +12,20 @@ type ITabPaneProps = {
 };
 
 const Tabs = props => {
-  const { children, onTabClick, defaultActiveKey } = props;
+  const { children, onTabClick, defaultActiveKey, activeKey } = props;
   const [state, setState] = useMergeState({
     tabPaneElements: {},
     childrenArr: isArray(children) ? children : [children],
-    activeKey: defaultActiveKey
+    _activeKey: defaultActiveKey
   });
-  const { tabPaneElements, childrenArr, activeKey } = state;
+  const { tabPaneElements, childrenArr, _activeKey } = state;
 
   useEffect(() => {
     const tabPaneElements = {};
     childrenArr.forEach((item, index) => {
       if (!defaultActiveKey && index === 0) {
         setState({
-          activeKey: item.key
+          _activeKey: item.key
         });
       }
       tabPaneElements[item.key] = item.props.children;
@@ -38,12 +38,12 @@ const Tabs = props => {
   const { handleClick } = useMemo(() => {
     const handleClick = key => {
       setState({
-        activeKey: key
+        _activeKey: key
       });
       onTabClick && onTabClick(key);
     };
     return { handleClick };
-  }, [onTabClick, tabPaneElements, activeKey]);
+  }, [onTabClick]);
 
   return (
     <View className="tabs">
@@ -63,7 +63,11 @@ const Tabs = props => {
               }}
             >
               <View
-                className={activeKey == item.key ? "tab active-tab" : "tab"}
+                className={
+                  (activeKey || _activeKey) == item.key
+                    ? "tab active-tab"
+                    : "tab"
+                }
               >
                 <Text>{item.props.tab}</Text>
               </View>
@@ -71,7 +75,9 @@ const Tabs = props => {
           );
         })}
       </View>
-      <View style={{ width: "100%" }}>{tabPaneElements[activeKey]}</View>
+      <View style={{ width: "100%" }}>
+        {tabPaneElements[activeKey || _activeKey]}
+      </View>
     </View>
   );
 };

@@ -1,7 +1,3 @@
-type LooseObject = {
-  [key: string]: any;
-};
-
 /**
  * 时间格式化
  * dateFormat("YYYY-mm-dd HH:MM:SS", 2021-12-30T09:02:24.000+08:00) => 2021-12-30 09:02:24
@@ -19,7 +15,7 @@ export function dateFormat(fmt: string, date: Date) {
     "d+": date.getDate().toString(), // 日
     "H+": date.getHours().toString(), // 时
     "M+": date.getMinutes().toString(), // 分
-    "S+": date.getSeconds().toString(), // 秒
+    "S+": date.getSeconds().toString() // 秒
     // 有其他格式化字符需求可以继续添加，必须转化成字符串
   };
   for (let k in opt) {
@@ -45,7 +41,7 @@ export function dateFormat(fmt: string, date: Date) {
 export function curry(fn: Function) {
   return function curriedFn(...args: any[]) {
     if (args.length < fn.length) {
-      return function () {
+      return function() {
         return curriedFn(...args.concat(Array.from(arguments)));
       };
     }
@@ -58,7 +54,7 @@ export function curry(fn: Function) {
  * @returns
  */
 export function guid(): string {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
     var r = (Math.random() * 16) | 0,
       v = c == "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
@@ -288,7 +284,7 @@ export function cloneDeep<T>(obj: T): T | any[] {
   if (Array.isArray(obj)) {
     result = [];
 
-    obj.forEach((item) => {
+    obj.forEach(item => {
       result.push(cloneDeep(item));
     });
     return result;
@@ -311,7 +307,7 @@ export function flatDeep(data?: any, rel: Array<any> = []) {
     rel.push(data);
     return rel;
   }
-  data.map((item) => {
+  data.map(item => {
     if (Array.isArray(item)) {
       return flatDeep(item, rel);
     } else {
@@ -360,13 +356,13 @@ export function arrayToTree(
 
     if (!itemMap[id]) {
       itemMap[id] = {
-        [childrenKey]: [],
+        [childrenKey]: []
       };
     }
 
     itemMap[id] = {
       ...item,
-      [childrenKey]: itemMap[id][childrenKey],
+      [childrenKey]: itemMap[id][childrenKey]
     };
     const treeItem = itemMap[id];
 
@@ -375,7 +371,7 @@ export function arrayToTree(
     } else {
       if (!itemMap[pid]) {
         itemMap[pid] = {
-          [childrenKey]: [],
+          [childrenKey]: []
         };
       }
       itemMap[pid][childrenKey].push(treeItem);
@@ -394,7 +390,7 @@ export function arrayToTree(
  */
 export function unique(arr: any[]) {
   var obj = {};
-  return arr.filter(function (item, index, arr) {
+  return arr.filter(function(item, index, arr) {
     return obj.hasOwnProperty(typeof item + item)
       ? false
       : ((obj as any)[typeof item + item] = true);
@@ -420,7 +416,7 @@ export function appendParam(url: string, key: any, value?: string) {
   if (!key || isEmptyObject(key)) {
     return url;
   }
-  let options: LooseObject = {};
+  let options: Record<string, any> = {};
   if (typeof key == "string") {
     options[key] = value;
   } else {
@@ -472,7 +468,10 @@ export function objectToParam<T>(query: T, isEncode: boolean = true): string {
  * paramToObject(location.search) => {}
  * // 如果参数里面有url或者中文，请先自行先encodeURIComponent字符串
  */
-export function paramToObject(query: string, obj?: LooseObject | unknown) {
+export function paramToObject(
+  query: string,
+  obj?: Record<string, any> | unknown
+) {
   var ret: any = obj || {};
   var searchReg = /([^&=?]+)=([^&]+)/g;
   var name, value;
@@ -490,7 +489,7 @@ export function paramToObject(query: string, obj?: LooseObject | unknown) {
 
 export function deleteUndefined(data: any) {
   return Object.keys(data)
-    .filter((key) => data[key] !== null && data[key] !== undefined)
+    .filter(key => data[key] !== null && data[key] !== undefined)
     .reduce((acc, key) => ({ ...acc, [key]: data[key] }), {});
 }
 /**
